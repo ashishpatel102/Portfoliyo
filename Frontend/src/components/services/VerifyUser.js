@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import LoginContext from '../common/LoginProvider';
-import HostIP  from './HostIP ';
+import HostIP  from './HostIP';
 
 function useVerifyUser() {
   const [, setLogin] = useContext(LoginContext);
