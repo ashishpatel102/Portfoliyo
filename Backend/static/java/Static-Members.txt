@@ -1,0 +1,133 @@
+Static Members in Java -> Static members wo members (variables, methods) hote hain jo class level par define kiye jaate hain, na ki object level par. Matlab, ye members class ke sare objects ke liye shared hote hain aur kisi bhi object ke through directly access kiye ja sakte hain. Static members ko static keyword ke saath define kiya jata hai
+
+access static members - >  waise static ke liye koi object ki jarurat nahi hoti class ke name ke sath access kar sakate hai jab object bana ke access karate hai tab bhi compiler use khud modify kar deta hai ye achhi practic nahi hai static ke liye objec na banaye class ke name se hi access kare object se nahi 
+Types of Static Members
+
+    1. Static Variables
+    2. Static Methods
+    3. Static Blocks
+    4. Static Classes (Inner Classes)
+
+
+----------------------------------------------------
+1. Static Variable -> Static variables ki ek hi copy hoti hai jo class level par shared hoti hai. Agar kisi object ne value change ki, to wo class ke sare objects ke liye reflect ho jati hai.
+
+
+class Temp {
+    static int a = 0;
+
+
+    public static void main(String[] args) {
+        Temp obj1 = new Temp();
+        Temp obj2 = new Temp();
+        Temp obj3 = new Temp();
+        obj1.a = 10;
+        System.out.println(obj1.a);
+        System.out.println(obj2.a);
+        System.out.println(obj3.a);
+    }
+}
+
+
+output -> 
+        10
+        10
+        10
+
+note -> class level par hone ke karan nahi change hui kahane ko kag sakate ho ki object se bhi access kar sakate ho par jvm is code ko galat manata hai jab static variable ko access kiya jata hai object se to jvm khud is bat ka dhyan rakhata hai ki object ki jagah par class name ho to jvm har us jagah ko change kar deta hai class name se jaha jaha object se access kiya jata hai state variable ya method ko
+
+---------------------------------------------------------
+sahi code ye hai aur yahi code likhana bhi chahiye 
+
+class Temp {
+    static int a = 0;
+
+
+    public static void main(String[] args) {
+        
+        Temp.a = 10;
+        System.out.println(Temp.a);
+        System.out.println(Temp.a);
+        System.out.println(Temp.a);
+    }
+}
+
+output -> 
+         10 
+         10
+         10
+
+-------------------------------------------
+2. Static Methods -> static method class level par hoti hai is liye static method ka use bina object banaye kar sakate hai object bana kar bhi kar sakate hai par ye galat tarika hai hamesha class ke name se hi kiya jaye 
+
+
+-> static method outside variable ko tabhi access kar payega jab o variable static ho aur static method me this keyword ka use nahi kar sakate hai 
+
+
+class Temp {
+    static int a = 0;
+    int b = 20;
+
+    static void display(){
+        System.out.println(a);
+        // System.out.println(this.a);// error
+        // System.out.println(b);//error
+    }
+    public static void main(String[] args) {
+        Temp.display();
+    }
+}
+
+
+output -> 0
+
+----------------------------------------
+3. Static Blocks  -> Static blocks ka use tab hota hai jab kisi class ki static variables ko initialize karna ho ya koi one-time initialization process perform karna ho.
+
+-> state block ek hi bar Except hota hai uske bad nahi 
+
+class Temp {
+    static int count;
+
+    static {
+        count = 10;
+        System.out.println("Static block executed. Count: " + count);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Main method executed. Count: " + count);
+    }
+}
+
+output ->
+        Static block executed. Count: 10
+        Main method executed. Count: 10
+
+
+
+------------------------------------------------------------
+4. Static Inner Classes -> Static inner classes ko outer class ke object ki bina instantiate kiya ja sakta hai.
+    -> outer class ko static nahi banaya ja sakata 
+    ->  outer class ko sirf public, abstract & final banaya ja sakata hai obhi public class sirf ek class ko banaya ja sakata hai jisme main ho 
+
+
+class Outer {
+    static int x = 10;
+
+    static class Inner {
+        void display() {
+            System.out.println("Static inner class. x = " + x);
+        }
+    }
+
+    public static void main(String[] args) {
+        Outer.Inner innerObj = new Outer.Inner();
+        innerObj.display();
+    }
+}
+
+
+outer -> Static inner class. x = 10
+
+
+

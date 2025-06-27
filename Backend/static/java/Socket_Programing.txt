@@ -1,0 +1,75 @@
+Networking -> Networking ek aisi technology hai jisme 2 ya 2 se jyada computers/devices ko ek dusare se connect kar dete hai taki woh data share kar sakein 
+
+isme data softwere and hardwere bhi sheare hote hai 
+
+
+Computer Networking is the process of connecting two or more computing devices for the purpose of sharing resources (like files, internet, printers) and communication using wired or wireless medium
+
+Networking Ki Jarurat -> data aur hardwere ko share karane ke liye pahale data ko ek device se dusari device tak le jane ke liye pandrive jaise technology ka use karate the printer yani hardwere har device ke liye alag alag rakhana padata tha in sab ko hatane ke liye Networking laya gaya ab data yani file printer ye sab apas me share ho sakate hai ek jagah se dosari jagah par 
+
+Networking ke Components -> 
+_________________________________________
+
+(1) hardwere -> Computers, Laptops, Mobiles ,Routers, Switches, Modems
+
+(2) Media ->
+Wired: LAN Cable
+Wireless: WiFi, Bluetooth
+
+(3) Protocols -> HTTP, TCP/IP, FTP, etc
+
+
+TCP/IP (Transmission Control Protocol / Internet Protocol)
+______________________________________________________________
+
+TCP/IP un protocols ka ek group hai jo internet ya kisi bhi network pe data ko transfer karne ke rules define karta hai
+
+yani TCP/IP ek protocol suite hai jiska use internet aur computer networks me communication ke liye hota hai
+Iska kaam data ko reliably ek computer se doosre computer tak bhejna hai
+
+TCP/IP is a suite of communication protocols used to interconnect network devices on the internet
+It breaks data into packets (TCP) and ensures it reaches the correct address (IP) reliably and in order
+
+
+TCP/IP ki Zarurat
+_________________________
+
+Socho 1960s-70s ka zamana Computers alag-alag jagah lage hue the kisi university me, kisi army base me, kisi space center me
+Ye computers ek doosre se baat nahi kar paate the
+Har machine ka apna alag system, apna protocol hota tha
+Agar IBM ka computer aur Xerox ka computer hote, to wo aapas me baat nahi kar paate
+
+Problem ye thi ki Har company apna protocol bana rahi thi koi proprietary language jise dusra samajh hi nahi pata tha. Is wajah se inter-communication impossible ho raha tha
+
+1973 USA Department of Defense ka ARPANET project
+______________________________________________________________
+Ek aisa common system develop karna jo har computer chahe koi bhi ho ek doosre se baat kar sake
+
+unho ne TCP/IP protocol suite bana liya jo 1983 me officially standard bana
+
+TCP vs IP -> TCP Data ko chhote packets me todta hai IP Packet ko sahi address tak bhejne ka kaam karta hai
+
+
+example -> Tum ek gift box bhejna chahte ho USA me kisi dost ko Tumhara TCP box ko parts me divide karta hai aur numbering karta hai Tumhara IP har part pe correct address likhta hai Courier company har part ko deliver karti hai Wahan tumhara dost sare parts collect karke TCP se unko original shape me wapas jodta hai
+
+Ye 2 major protocols par based hai:
+
+1 -> TCP (Transmission Control Protocol) – Reliable communication
+
+2 -> IP (Internet Protocol) – Addressing aur routing
+
+
+TCP/IP ke 4 layers hote hain
+_________________________________________
+
+1 -> Application Layer
+2 -> Transport Layer
+3 -> Internet Layer
+4 -> Network Access Layer
+
+Networking Types
+-----------------------------
+
+(1) LAN
+(2) MAN
+(3) WAN

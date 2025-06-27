@@ -1,0 +1,148 @@
+Java Access Modifiers -> Java me 4 types ke access modifiers hote hain jo class, method, variable, aur constructor ke visibility ko control karte hain yaani yeh decide karte hain ki in elements ko kaun access kar sakta hai aur kaun nahi
+
+Types of Access Modifiers->
+
+1. public
+2. private
+3. protected
+4. default  
+
+note -> Functional yah block ke andar bane variable me koi access modifier nahi use hoga
+
+--------------
+1. public -> public Modifier ek aisa access modifier hai jo ye allow karata hai ki wah elements har jagah jagah se access ho sakata hai jis elements pe ye laga hai jaise variable method constructor 
+
+-> Same class ✔
+-> Same package ✔
+-> Subclass (different package) ✔
+-> Non-subclass (different package) ✔
+
+package example;
+
+public class Car {
+    public String brand = "Tesla";  // Public variable
+
+    public void displayBrand() {  // Public method
+        System.out.println("Brand: " + brand);
+    }
+}
+
+
+package test;
+
+import example.Car;
+
+public class Test {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.displayBrand();  // Accessible due to public modifier
+    }
+}
+
+package -> Package ek folder jaisa logical group hota hai jisme related classes, interfaces aur sub-packages (folder) ko rakha jata hai. Iska kaam code ko organize karna, maintain karna aur naming conflicts ko avoid karna hota hai.
+
+
+
+-----------------------------------------------------
+2. Private -> private modifier ek aisa access modifier hai jo jis elements me lag jata hai use private kar deta hai yani uska access sirf usi class tak hi rah jata hai yah ek block tak hi use ho sakata hai yani class ke andar 
+
+note -> class private ,protected ka use upper level class ke liye nahi hota public ka use kar sakate ho par sirf ek class ke liye jisme main ho baki inner class ke liye sabhi access modifier use kar sakate ho
+-> iska use upper class ke adar hota hai   
+
+
+Use -> Jab data ko encapsulate karna ho aur kisi bhi external access ko rokna ho.
+
+
+-> Same class ✔
+-> Same package ❌
+-> Subclass (different package) ❌
+-> Non-subclass (different package) ❌
+
+class Example {
+    private int number = 10;
+
+    private void display() {
+        System.out.println("Private method called");
+    }
+}
+
+
+_________________________________________________
+
+3. Protected -> protected modifier ko commonly inheritance me use kiya jata hai, taaki subclasses ke andar parent class ke members ko access kiya ja sake.
+-> Default modifier ke comparison me protected wider scope deta hai kyunki yeh subclasses ke liye accessible hota hai, chahe woh different package me hi kyun na ho.
+
+
+-> Same class: ✔
+-> Same package: ✔
+-> Subclass (different package): ✔
+-> Non-subclass (different package): ❌
+
+___________________Sub Class (Same Package)__________________________________
+package example;
+
+public class Parent {
+    protected void display() {
+        System.out.println("This is a protected method.");
+    }
+}
+
+public class Child extends Parent {
+    public static void main(String[] args) {
+        Child obj = new Child();
+        obj.display(); // Accessible because it's in the same package
+    }
+}
+
+___________________Sub Class (Different Package)______________________________
+
+
+package another;
+
+import example.Parent;
+
+public class SubChild extends Parent {
+    public static void main(String[] args) {
+        SubChild obj = new SubChild();
+        obj.display(); // Accessible because SubChild extends Parent
+    }
+}
+
+____________________Non-Subclass (Different Package)_____________________________
+
+package another;
+
+import example.Parent;
+
+public class Test {
+    public static void main(String[] args) {
+        Parent obj = new Parent();
+        // obj.display(); // Error: display() is not accessible
+    }
+}
+
+
+
+
+
+
+---------------------------------------------------------------------
+4. Default(No Modifier) -> Java me default access modifier ko explicitly mention nahi karte, balki agar koi modifier nahi diya gaya ho to us element ko default access diya jata hai. Iska matlab hai ki class, variable, method, ya constructor sirf same package ke andar hi accessible hote hain, lekin different packages se nahi.
+
+No Keyword Required -> Default access ke liye koi specific keyword nahi hota.
+Package-Level Visibility -> Sirf same package ke classes aur subclasses ke liye accessible hota hai.
+Different package ke andar ye accessible nahi hota.
+Use -> Jab kisi member ko package ke andar hi accessible rakhna ho aur global ya subclass access ki zarurat na ho.
+
+Same class: ✔
+Same package: ✔
+Subclass (different package): ❌
+Non-subclass (different package): ❌
+
+
+
+Modifier	Same Class	Same Package	Subclass (Different Package)	Non-Subclass (Different Package)
+public	        ✔	        ✔	                    ✔	                            ✔
+protected	    ✔	        ✔	                    ✔	                            ❌
+default	        ✔	        ✔	                    ❌	                           ❌
+private	        ✔	        ❌	                   ❌	                          ❌

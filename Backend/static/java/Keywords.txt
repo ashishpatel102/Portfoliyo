@@ -1,0 +1,397 @@
+Keywords in Java -> Java me keywords predefined reserved words hote hain jinka specific meaning aur functionality hota hai. Yeh language ke syntax ka hissa hote hain aur unhe variable names ya identifiers ke tarah use nahi kiya ja sakta.
+
+Special Keywords in Java ->
+    const -> Reserved but not used (alternative is final).
+    goto -> Reserved but not used.
+
+
+
+this Keywords ->  Java me this ek reference variable hota hai jo current object ka reference store karta hai. 
+-> ek bat ka dhyan rahe jis class me use ho raha this uska reference nahi balki jis class ka object banaya gaya hai aur jis object se caling hui hai uska reference rakhata hai 
+
+-> this keyword ka use static method me nahi ho sakata ku ki o class level pe hota hai aur uske liye object creation ki jarurat nahi hoti
+
+importaint -> this curent object ka reference to rakhata hai ye bat sahi hai par this 3 tarike se kam karata hai 
+
+1. Overhiding
+2. method Overriding
+3. constructor unspected output
+
+----------------------------------------------------------
+1. Overhiding -> method Overhiding tab hota hai jab inheritance ho raha ho parent class me state method aur variable ke sath isme this jis class me hai usi class ke variable aur method call karega 
+
+2. method overriding  -> method overriding tab hota hai jab inheritance ho raha ho parent class ke method ko child class overrid kar le isme this pahele us class me dekhega jiska object bana hai nahi mila to apane parent ke pass jayega usme nahi milga to uske bhi parent ke pass jayega 
+
+3. constructor unspected output -> constructor ko jis kam ke liye banaya gaya hai usme wahi kare constructor me agar variable Access method calling jaise kam karoge to unspected error ya fir variable ki value unspected mil sakati hai ku ki inislization compile hone de tabhi call kare method pahele hi call kar denge to inislization bad me hoga aur method call hoga pahele  
+
+
+-> dhyan rahe ye 3 tarike hai aur in tariko ko dhyan rakhe sabse jyada ye bat ki method aur variable constructor ke andar se call na ho 
+
+
+-> agr tumhe lagata hai ye nahi hota to ye asal me hota hai aur is bat ko dhyan me rakhe age example hai 
+
+
+----------------------------------------------
+method overriding this parent me  
+
+example 1 -> 
+
+
+
+public class Temp {
+
+    public static void main(String[] args) {
+ 
+        A obj = new B();
+        obj.show();
+
+    }
+}
+
+class A{
+    void display(){
+        System.out.println("display A");
+    }
+    void show(){
+        this.display();
+    }
+
+}
+
+class B extends A{
+    
+    void display(){
+        System.out.println("display B");
+    }
+    void show(){
+        super.show();
+    };
+
+}
+
+
+Output -> display B 
+
+
+-> aisa ku hua ku ki this curent object ko point kar raha hai aur o pahele jis class ka object bana hai usme khojega jab usme milega to call karega nahi milega to parent me jayega
+
+--------------------------------------------------------------------------------
+Overhiding problem -> isme khud ke class ke method ya variable ko call karega object kisi ka bhi ho
+
+class Parent {
+    int number = 100;
+    
+    void display() {
+        System.out.println(this.number);
+    }
+
+}
+
+public class Temp extends Parent {
+    int number = 200;
+
+    void show() {
+        super.show(); 
+    }
+    
+
+    public static void main(String[] args) {
+        Temp obj = new Temp();
+        obj.show();  
+    }
+}
+
+-----------------------------------------------------------------------
+constructor unspected output -> isme method calling constructors me hota hai jiske karan output default value ya fir unspected value aa sakati hai 
+
+
+
+class Parent {
+    int number = 100;
+    Parent(){
+        this.display();
+    }
+    void display() {
+        System.out.println("Parent class display method"+this.number);
+    }
+
+}
+
+public class Temp extends Parent {
+    int number = 200;
+    Temp(){
+        super();
+    }
+    void display() {
+        System.out.println("Child class display method"+this.number);
+    }
+
+    public static void main(String[] args) {
+        Temp obj = new Temp();  
+    }
+}
+
+output -> Child class display method0  -> jabaki output anachahiye tha -> Child class display method200
+
+
+-------------------------------------------------------------------------------------------
+uska sahi tarika ye hai aise method calling karan chahiye
+
+class Parent {
+    int number = 100;
+    
+    void display() {
+        System.out.println("Parent class display method");
+    }
+
+    void show() {
+        this.display(); 
+    }
+}
+
+public class Temp extends Parent {
+    int number = 200;
+    void show() {
+        super.show(); 
+    }
+    void display() {
+        System.out.println("Child class display method"+this.number);
+    }
+
+    public static void main(String[] args) {
+        Temp obj = new Temp();
+        obj.show();  
+    }
+}
+
+output -> Child class display method200
+
+
+
+
+____________________________________________________________________
+super keyword -> super keyword ek aisa keyword hai jo parent ka reference rakhata hai har class me super apane parent ko ref karata hai
+
+man lo ek class A hai aur class B extends A hui hai aur C extends B hui hai to super kise ref karega auper kisi ko nahi ref karega yani har class me super ko update kiya jata hai c me B ko point karega B me A ko aur A me Object Class ko poin karega 
+
+use -> super class ke method ya variable ko Access karane ke liye kiya jata hai inheritance me 
+
+
+
+
+
+class Parent{
+    int number = 100;
+    void display() {
+        System.out.println("Parent class display method");
+    }
+
+}
+
+public class Temp extends Parent {
+    int number = 200;
+
+    void display() {
+        System.out.println(this.number);
+        System.out.println(super.number);
+        super.display();
+    }
+
+    public static void main(String[] args) {
+        Temp obj = new Temp();
+        obj.display();  
+    }
+}
+
+
+output -> 
+        200
+        100
+        Parent class display method
+
+
+
+____________________________________________________________________
+
+constructor chaining -> Constructor Chaining ka matlab hota hai ek constructor se doosre constructor ko call karna. Iska purpose hota hai code reusability aur object initialization ko efficiently manage karna.
+
+Types of Constructor Chaining:
+
+1. super(); parent class constructor colling
+2. this(); curent class constructor caling
+
+
+_________________________________
+this() ka use 
+
+class A {
+    A() {
+        this(10);
+        System.out.println("No-argument constructor");
+    }
+
+    A(int num) {
+        this(num, 20);
+        System.out.println("One-parameter constructor: " + num);
+    }
+
+    A(int num1, int num2) {
+        System.out.println("Two-parameter constructor: " + num1 + ", " + num2);
+    }
+}
+
+public class TestChaining {
+    public static void main(String[] args) {
+        new A();
+    }
+}
+
+output -> 
+        Two-parameter constructor: 10, 20  
+        One-parameter constructor: 10  
+        No-argument constructor  
+
+
+____________________________________________________________________
+
+super() ka use
+
+class A {
+    A() {
+        System.out.println("Parent class constructor");
+    }
+
+    A(int x) {
+        System.out.println("Parent class parameterized constructor: " + x);
+    }
+}
+
+class B extends A {
+    B() {
+        super(50);
+        System.out.println("Child class constructor");
+    }
+}
+
+public class TestInheritance {
+    public static void main(String[] args) {
+        new B();
+    }
+}
+
+
+output -> 
+        Parent class parameterized constructor: 50  
+        Child class constructor  
+
+
+
+____________________________________________________________________
+
+final keyword -> Final keyword ko Java me variables, methods, aur classes ke sath use kiya jata hai. Iska primary purpose cheezon ko unchangeable ya non-modifiable banana hota hai.
+->Final variable ki value ko set hone ke baad change nahi kiya ja sakta
+
+ 1. final variable
+ 2. final method
+ 3. final class
+ 4. Final Parameters
+ 5. Final Static Variable (Constant)
+
+
+--------------------------------------------------------
+1. final variable ->
+
+key point -> 
+
+-> final variable ko bina inislization kiye use nahi kar sakate
+-> final variable use kiya jate ya na agar inislization nahi hai to compile time error ayega 
+-> final variable ko state blocks se inislization kar sakate hai par variable static hona chahiye
+-> final variable ko init blocks se inislization kar sakate hai 
+-> final variable ko constructor se inislization kar sakate hai par agar ek se jyada constructor huye to sab me inislization karan padega nahi to compile time error ayegi 
+
+
+class Example {
+    final int constantValue = 100;
+
+    void display() {
+        // constantValue = 200;  // Error: Cannot assign a value to final variable
+        System.out.println("Constant Value: " + constantValue);
+    }
+
+    public static void main(String[] args) {
+        new Example().display();
+    }
+}
+
+----------------------------------------------
+2. final method ->  Final method ko overrid nahi kiya ja sakata inherit kiya ja sakata hai yani method final ho gaya to method ko child overrid nahi kar payega
+
+
+class Parent {
+    final void display() {
+        System.out.println("Parent class final method");
+    }
+}
+
+class Child extends Parent {
+    // void display() {  // Error: Cannot override final method
+    //     System.out.println("Child class method");
+    // }
+}
+
+public class TestFinal {
+    public static void main(String[] args) {
+        new Child().display();
+    }
+}
+
+
+------------------------------------------------------
+3. final class -> Final class ek aisi class hai jiska inheritance nahi ho sakata yani iska child nahi ho sakata sirf iska object banaya ja sakata hai use karane ke liye yani composition ke through inherit kar sakate hai 
+
+
+final class Parent {
+    void display() {
+        System.out.println("Final class method");
+    }
+}
+
+// class Child extends Parent {  // Error: Cannot inherit from final class
+// }
+
+public class TestFinal {
+    Parent obj = new Parent();// composition inheritance
+    public static void main(String[] args) {
+        new Parent().display();
+    }
+}
+
+
+
+-----------------------------------------------------
+4. Final Parameters -> Method parameters ko final banane ka matlab hai unki value ko method ke andar change nahi kiya ja sakta.
+
+
+class Example {
+    void display(final int num) {
+        // num = num + 10;  // Error: Cannot assign a value to final parameter
+        System.out.println("Final parameter value: " + num);
+    }
+
+    public static void main(String[] args) {
+        new Example().display(50);
+    }
+}
+
+
+--------------------------------------
+
+5. Final Static Variable (Constant) -> Final static variables ko constants ki tarah use kiya jata hai. Inki value ko initialize karne ke baad kabhi change nahi kiya ja sakta
+
+class Constants {
+    static final double PI = 3.14159;
+
+    public static void main(String[] args) {
+        System.out.println("Value of PI: " + PI);
+    }
+}

@@ -1,0 +1,274 @@
+Polymorphism
+
+Polymorphism ka matlab hai ki ek hi name ke method alag-alag forms me kaam kar sakta hai. Java me polymorphism do tarike se hota hai 
+
+1. Compile-time Polymorphism (Method Overloading , Method hiding)
+    -> compile-time polymorphism ka matlab hai ki method ka call compile time par hi decide ho jaata hai
+    -> ye fast hota hai 
+    -> Static Binding
+    -> Early Binding
+    -> Static methods aur final, private methods ka binding compile time par hota hai.
+    -> Static binding ko method overriding ke case me apply nahi kiya jaata.
+   importaint ->Class ke reference se hi static binding decide hota hai, na ki object ke runtime par banne wale instance se.
+
+    1 static Binding 
+        static method -> static method static Binding ka part hai jo compile-time par hi decide ho jata hai kon sa method call hoga 
+
+        class Demo {
+            static void display() {
+                System.out.println("Static method in Demo class");
+            }
+        }
+
+        public class Test {
+            public static void main(String[] args) {
+                Demo.display();
+            }
+        }
+
+        ------------------------------------------------
+        method hiding -> static method overrid nahi balki method hiding hota hai ye bhi compile time par decide hota hai ki kon sa method call hoga java me object ke sath bhi call ho sakata hai par reference variable pe depend karega kon se class ka reference variable hai usi ke hisab se call hoga object kisi bhi class ka ho 
+
+
+
+            class A{
+            
+                static void show(){
+                    System.out.println("class A");
+                };
+            }
+
+            class B extends A{
+            
+                static void show(){
+                    System.out.println("class B");
+                };
+            }
+
+            public class Temp {
+                public static void main(String[] args) {
+            
+                    A obj = new B();
+                    obj.show();// class A
+
+                }
+            }
+
+----------------------------------------------------------------------
+
+final method bhi compile-time me hi decide hota hai kon sa calll hoga 
+
+
+
+class A{
+   
+    final void show(){
+        System.out.println("class A");
+    };
+}
+
+class B extends A{
+  
+    final void show1(){
+        System.out.println("class B");
+    };
+}
+
+public class Temp {
+    public static void main(String[] args) {
+ 
+        A obj = new B();
+        obj.show1();// error type error (ku ki A ke pass show1() nahi hai) 
+
+    }
+}
+
+
+
+----------------------------------------------
+
+Variables -> variable overriding nahi hote chahe static ho ya na ho variable Overhiding ka Concept use karata hai aur ye compile - time (Static binding) binding hai 
+
+
+class Parent {
+    int value = 10;
+}
+
+class Child extends Parent {
+    int value = 20;
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Parent obj = new Child();
+        System.out.println("Value: " + obj.value);  // Output: 10 (Static binding)
+    }
+}
+
+
+----------------------------------------------
+
+method Overloading -> Jab ek hi class me ek hi naam ke methods alag-alag parameter ke sath define kiye jaate hain, to usse method overloading kehte hain. Is process ko Compile-Time Polymorphism bhi kaha jata hai kyunki method ka call compile time par hi decide ho jaata hai.
+
+
+-> Method ka naam same hota hai.
+-> Parameters ka type, number ya order different hota hai.
+-> Return type ka koi lena-dena nahi hota (sirf return type alag hone par overloading nahi hoti).
+-> Constructor overloading bhi possible hota hai.
+
+
+
+class A{
+   
+    void show(){
+        System.out.println("class A");
+    };
+    void show(int a){
+        System.out.println(a);
+    };
+
+    void show(int a , int b){
+        System.out.println(a+b);
+    };
+
+}
+
+public class Temp {
+    public static void main(String[] args) {
+ 
+        A obj = new A();
+        obj.show();
+
+    }
+}
+
+----------------------------------------------
+Constructor overloading -> Jab ek class ke andar multiple constructors ko alag-alag parameters ke sath define kiya jata hai, to use constructor overloading kehte hain. Ye concept method overloading ke tarah hi hota hai, jisme constructors ka naam same hota hai lekin parameter list different hoti hai.
+
+-> Same Class Name: Sabhi constructors ka naam class ke naam ke barabar hota hai.
+-> Different Parameters: Constructors ke parameters ka type, number ya order different hota hai.
+-> No Return Type: Constructors ka koi return type nahi hota.
+-> Constructor ka selection compile-time par hota hai yani decide compile time par hi ho jata hai, lekin execution runtime par hota hai.to ye compile time polymorphism hua 
+
+class Person {
+    String name;
+    int age;
+
+    // Constructor with no arguments
+    Person() {
+        name = "Unknown";
+        age = 0;
+    }
+
+    // Constructor with one argument
+    Person(String name) {
+        this.name = name;
+        this.age = 0;
+    }
+
+    // Constructor with two arguments
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    void display() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Person p1 = new Person();     
+        Person p2 = new Person("Rahul"); 
+        Person p3 = new Person("Priya", 25);
+
+        p1.display();
+        p2.display();
+        p3.display();
+    }
+}
+
+
+-------------------------------------------------------------
+2. Runtime Polymorphism (Method Overriding)
+
+Runtime polymorphism, jo dynamic method dispatch ke naam se bhi jaana jaata hai, ek aisa concept hai jisme method call ko runtime par resolve kiya jaata hai. Isme, subclass apne parent class ke method ko override karta hai, aur jab method call hota hai, to JVM (Java Virtual Machine) decide karti hai ki kaunsa method execute hoga based on the object type.
+
+importent key point
+    method overriding -> Ye tab hota hai jab subclass apne parent class ke method ko redefine karta hai.
+    Dynamic Dispatch -> JVM runtime par decide karti hai ki kaunsa method execute hoga. Ye method ka call object ke actual type ke basis par hota hai (reference type nahi)
+    -> Runtime polymorphism ke liye hamesha reference variable parent class ka hona chahiye agar aisa nahi hota to compile time me hi decide ho jayega ki kon sa method call hoga aur ye compile time aur runtime dono me aa jayega yani decide compile time par mana runtime polymorphism hi 
+    -> parent ref child object
+
+
+
+note -> runtime polymorphism ke liye reference variable parent class ka hona chahiye 
+
+
+example1 ->
+--------------------------------------------------------
+
+class A{
+   
+    void show(){
+        System.out.println("class A");
+    };
+
+}
+
+class B extends A{
+  
+    void show(){
+        System.out.println("class B");
+    };
+
+}
+
+public class Temp {
+    public static void main(String[] args) {
+ 
+        A obj = new B();
+        obj.show();// class B
+
+    }
+}
+
+
+example 2 -> 
+-------------------------------------------------
+
+
+
+class A{
+   
+    void show(){
+        System.out.println("class A");
+    };
+
+}
+
+class B extends A{
+  
+    void show(){
+        System.out.println("class B");
+    };
+
+}
+
+public class Temp {
+    public static void main(String[] args) {
+ 
+        B obj = new B();
+        obj.show();// class B
+
+    }
+}
+
+
+-> dono ka output same hai par dono me bahut farak hai example 1  me runtime polymorphism ho raha example 2 me compile time polymorphism ho raha 
+
+explain -> reference variable ko run time par hi memory mil jati hai par object ko compile time me reference agar child ka aur child ka object hua to ye compiler decide kar leta hai ki kin sa method call karana hai to jvm ki jarurat nahi hoti aur ye compile time polymorphism ka part ho jata hai agar reference variable parent class ka aur object child ka hua to compile decide nahi kar payega ki kon sa method call karan hai aur fir jvm isko run time par decide karega ki kon sa method call ho 
+
+
+

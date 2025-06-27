@@ -1,0 +1,113 @@
+OOPs (Object-Oriented Programming System)  
+
+  
+-> OOP ek programming paradigm hai jo objects aur classes ka use karta hai
+-> Aisi programing language jo opps key ko follow karati hai use Object-Oriented Programming language kahate hai
+
+
+Advantages of OOPs in Java  
+
+1.Modularity (Code Reusability):- Classes ko alag-alag banakar code ko reuse aur maintain karna easy hota hai.  
+2.Data Hiding:- Encapsulation ke zariye sensitive data ko hide karna possible hota hai, sirf authorized methods se access diya jata hai.  
+3.Code Maintenance:- Inheritance ke zariye existing code ko extend karna aur naye functionalities add karna simple hota hai.  
+4.Polymorphism:- Ek name ke mthod ke multiple kam ho sakate  
+5.Improved Productivity:- Classes aur objects ki modular approach se development faster hota hai.  
+6.Real-World Mapping:- Objects real-world entities ko better represent karte hain jaise car, person, etc.  
+
+
+
+Disadvantages of OOPs in Java  
+
+1.Complexity:- OOP concepts ko implement karna aur unhe manage karna thoda complex ho sakta hai.  
+2.Higher Memory Usage:- Objects aur classes ka use zyada memory consume kar sakta hai.  
+3.Slower Execution:- Dynamic dispatch aur abstraction jaise features program ki speed ko thoda slow kar sakte hain.  
+4.Not Suitable for All Problems:- Simple tasks ke liye procedural programming zyada efficient ho sakta hai.  
+
+
+
+
+Class ->
+        Class ek blueprint ya template hota hai jo objects ko define karta hai. Isme variables (data members) aur methods (functions) hote hain jo ek object ke behavior aur state ko specify karte hain. Java me har object kisi na kisi class ka instance hota hai.
+
+        -> bina class ke object nahi ban sakata bina object ke class ban sakata hai par class ka physical existence nahi hoga
+        -> class ek logical entity hai ye physical intity nahi hai matalab ye memory nahi leta jab tak iska object na banaya jaye  
+        
+        note -> jab tak class me static members nahi hai tabhi tak memory allocation nahi hoti jaise class me ek bhi Static members aye us class ki memory allocation ho jati hai 
+
+Syntax Example
+
+    class Car {
+    // Data members (attributes)
+    String brand;
+    int speed;
+    
+    // Method (behavior)
+    void displayInfo() {
+        System.out.println("Brand: " + brand);
+        System.out.println("Speed: " + speed + " km/h");
+    }
+}
+
+
+
+
+
+Need for Class in Java  
+
+    Real World Problems solve karane ke liye & complex Problems solve karane ke liye   
+
+
+
+
+
+Object -> 
+        Object ek real-world entity hota hai jo class ka instance hota hai. Matlab, object ek specific instance hota hai jo class ke blueprint ko follow karta hai. Har object ki apni state (data) aur behavior (functions) hote hain jo class ke through define kiye jaate hain.
+
+        Instance of a Class -> Object class ka ek instance hota hai, jo class ke variables aur methods ko real memory location me store karta hai.
+        State aur Behavior -> Object ki state uske attributes (variables) se hoti hai, aur behavior uske methods (functions) se hota hai.
+
+        Syntax of Creating an Object->
+
+            ClassName objectName = new ClassName();
+
+            explain->
+
+                ClassName ->            reference type 
+                objectName ->           reference variables
+                = ->                    asiment operator 
+                new ->                  Keyword Runtime constructor calling / run time memory allocated
+                ClassName() ->          constructor calling decision/Constructor / spacial method
+                (new ClassName()) ->    object
+
+
+
+Object vs Class:->
+
+Class: Blueprint ya template hai, jo object ke behavior aur attributes define karta hai.
+Object: Class ka ek instance hai, jo actual data aur behavior ko store karta hai.
+
+
+
+
+code ->
+
+class Car {
+    String brand;
+    int speed;
+    
+    void displayInfo() {
+        System.out.println("Brand: " + brand + ", Speed: " + speed + " km/h");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Car myCar = new Car();
+        
+        myCar.brand = "Toyota";
+        myCar.speed = 120;
+        
+        myCar.displayInfo();
+    }
+}

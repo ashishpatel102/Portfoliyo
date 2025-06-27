@@ -1,0 +1,239 @@
+Object Class -> Object class ek special class hai jo har class ka parent class hoti hai java me jitani bhi class banati hai sab ke sab object class se inherit hoti hai ab chahe tum karo ya na karo o inherit ho hi jati hai yani object class ke sare method attribute har class me automatic aa jati hai 
+
+java.lang.Object pacakge hai jo by default har class me  available hota hai.
+
+Purpose:- Object class basic methods provide karta hai jo saare objects ke liye common hote hain
+
+jaise -> equals(), hashCode(), toString(), clone(), wait(), notify()
+
+
+
+important -> agar tum kisi class ko inherit nahi kar rahe ho tab o object class ko inherit kar leti hai agr tum kisi class ko inherit kar lete ho to o object class ko inherit nahi karati ku ki multiple inherit nahi hota java me class ke throw 
+
+par yad rahe jis class ko inherit nahi karoge o object ko inherit kar legi yabi class A class B class C hai A-B-C A se inherit hui hai B aur B se C inherit hui hai C aur B me object class inherit nahi hogi par A me inherit ho jayegi ku ki A kisi se inherit nahi hui hai aur sabhi ke pass object ka properties aur method mil jayenge
+
+
+__________________________________________________________
+
+Object Class ki Important Methods
+
+toString()
+equals(Object)
+hashCode()
+getClass()
+clone()
+wait()
+notify()
+notifyAll()
+
+
+toString() -> ye Object class ka ek built-in method hai jo kisi object ko string me represent karne ke liye use hota hai
+
+-> isko override kar ke alag alag kam kara sakate hai override nahi karate to by default object class ka toString method hi call hoga
+
+-> ye har object ke sath by default call ho jata hai ye super keyword ke sath call nahi hota 
+
+toString() Default Implementation -> toString ka default behavior object ki class name aur hashcode ko return karta hai
+
+
+code -> 
+
+public String toString(){
+    return getClass().getName() + "@" + Integer.toHexString(hashCode());
+} 
+
+
+explain -> 
+getClass() method ->  current object ki class aur class ka name return karata hai 
+getName() > current class ka name return karata hai 
+Integer.toHexString(hashCode()) -> ye hexaDesimal code return karata hai hashCode() -> Integer hass code return karata hai jise toHexString() - hexaDesimal me convert kar deta hai hashCode() native method hai native ka matalab isko kisi aur language me jvm level par likha gaya hai jaise (C C++)
+
+
+
+
+example -> 
+
+        class Example {
+        }
+
+        public class Main {
+            public static void main(String[] args) {
+                Example obj = new Example();
+                System.out.println(obj.toString());
+            }
+        }
+
+        output ->  Example@15db9742
+
+
+__________________________________________________________
+
+override toString() 
+
+example -> 
+
+        class Example {
+            public String toString(){
+                return "Example class";
+            } 
+        }
+
+        public class Main {
+            public static void main(String[] args) {
+                Example obj = new Example();
+                System.out.println(obj.toString());
+            }
+        }
+
+        output ->  Example class
+
+
+
+
+__________________________________________________________
+
+equals(obj) -> Object class ka default equals() method reference comparison karta hai, matlab do objects memory me ek hi address par hain ya nahi ye check karta hai.
+
+Default Implementation -> 
+
+    public boolean equals(Object obj) {
+        return (this == obj);
+    }
+
+
+Default behavior ko override karke objects ke content ko compare karne ke liye customize kiya ja sakta hai
+
+
+String Class-> Java ke String class me equals() method override kiya gaya hai, jo content comparison karta hai
+
+equals(): Content ko compare karega.
+==: References ko compare karega.
+
+code -> 
+
+public class Main {
+    public static void main(String[] args) {
+        String str1 = new String("Hello");
+        String str2 = new String("Hello");
+
+        System.out.println(str1.equals(str2)); // Output: true
+        System.out.println(str1 == str2);     // Output: false
+    }
+}
+
+
+
+
+
+__________________________________________________________
+
+getClass() -> getclass method object class ka native mathod hai  jo class and class ka name return karata hai 
+
+
+
+example -> 
+
+class A {
+
+}
+
+
+class Temp{
+    public static void main(String args[]){
+        A obj = new A();
+        System.out.prinln(obj.getclass());
+    }
+}
+
+
+output -> class A
+
+
+
+
+
+
+
+
+
+
+__________________________________________________________
+
+object class inner representation ->
+
+
+
+ package java.lang;
+
+ public class Object {
+ 
+     public Object() {}
+ 
+     
+     public final native Class<?> getClass();
+ 
+    
+     public native int hashCode();
+ 
+     
+     public boolean equals(Object obj) {
+         return (this == obj);
+     }
+ 
+     
+     protected native Object clone() throws CloneNotSupportedException;
+ 
+
+     public String toString() {
+         return getClass().getName() + "@" + Integer.toHexString(hashCode());
+     }
+ 
+     
+     public final native void notify();
+ 
+     public final native void notifyAll();
+ 
+     
+     public final void wait() throws InterruptedException {
+         wait(0L);
+     }
+ 
+     
+     public final void wait(long timeoutMillis) throws InterruptedException {
+         long comp = Blocker.begin();
+         try {
+             wait0(timeoutMillis);
+         } catch (InterruptedException e) {
+             Thread thread = Thread.currentThread();
+             if (thread.isVirtual())
+                 thread.getAndClearInterrupt();
+             throw e;
+         } finally {
+             Blocker.end(comp);
+         }
+     }
+ 
+     
+
+     private final native void wait0(long timeoutMillis) throws InterruptedException;
+ 
+     public final void wait(long timeoutMillis, int nanos) throws InterruptedException {
+         if (timeoutMillis < 0) {
+             throw new IllegalArgumentException("timeoutMillis value is negative");
+         }
+ 
+         if (nanos < 0 || nanos > 999999) {
+             throw new IllegalArgumentException(
+                                 "nanosecond timeout value out of range");
+         }
+ 
+         if (nanos > 0 && timeoutMillis < Long.MAX_VALUE) {
+             timeoutMillis++;
+         }
+ 
+         wait(timeoutMillis);
+     }
+ 
+     protected void finalize() throws Throwable { }
+ }
+ 

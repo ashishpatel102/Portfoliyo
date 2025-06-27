@@ -1,0 +1,452 @@
+
+Java mein, package ek container ya folder ki tarah hota hai jo related classes, interfaces, aur sub-packages ko logically group karta hai. Packages ka use code ko organize karne, reuse karne, aur name conflicts avoid karne ke liye kiya jata hai.
+
+Packages ->  package ek classes, interfaces, aur sub-packages ka collection hota hai. project ko clean aur modular banate hain
+
+-> A package is a namespace that organizes a set of related classes and interfaces. It acts like a directory in the file system
+
+-> Iska kaam kuch usi tarah hota hai jaise ek folder me multiple files rakhi jaati hain
+
+
+key point ->
+    -> Package ka structure ek folder ke jaise hota hai.
+    -> Package ke andar classes ek tarah ki files ki tarah hoti hain.
+    -> Sub-packages ek folder ke andar doosre folder ko kahate hai.
+    -> package banane ke liye package keyword ka use karate hai 
+
+
+Aplication Of package -> 
+
+
+1. Provide extra level of security ->
+     Packages ka use karke classes aur methods ke access ko control kar sakte hain, jo security badhata hai.  
+2. Provide reusability of code ->   
+    Ek baar package create karne ke baad uska code baar-baar reuse kiya ja sakta hai, isse development faster aur efficient hota hai.  
+3. Maintain a high level of abstraction ->  
+    Packages high-level abstraction dete hain, jahan users sirf functionality dekhte hain, implementation details nahi.  
+4. Combine related files into a single unit ->  
+    Packages similar functionality wali files ko ek group me organize karte hain.  
+5. Remove naming conflicts ->   
+    Alag-alag packages me ek hi naam ki classes ho sakti hain bina kisi problem ke.  
+6. Maintainability becomes easy ->
+    Packages ki wajah se bade projects ka code maintain karna easy ho jata hai.  
+7. Increase performance ->  
+    Organized code ki wajah se application fast aur efficient run karta hai.  
+8. Provide flexibility ->  
+    Packages allow karte hain ki code ko alag-alag modules me tod ke rakha jaye, jisse flexibility badhti hai.  
+
+
+
+example -> 
+package structure
+
+school/
+|-- students/
+|   |-- StudentDetails.java
+|   |-- Attendance.java
+|
+|-- teachers/
+|   |-- TeacherDetails.java
+|   |-- Salary.java
+|
+|-- admin/
+    |-- AdminPanel.java
+    |-- Reports.java
+
+
+
+type of package ->
+
+1. Built-in Packages (Predefined Packages)
+2. User-defined Packages
+
+
+1. Built-in Packages (Predefined Packages) ->
+    Ye packages Java ke standard library ka hissa hote hain, jo Java runtime environment ke saath milte hain. Inme predefined classes aur interfaces hote hain jo commonly required functionalities provide karte hain.
+
+    example -> 
+        java.util: Collections framework, utilities jaise ArrayList, HashMap, etc.
+
+
+import java.util.ArrayList;
+
+public class Example {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Hello");
+        System.out.println(list);
+    }
+}
+
+
+
+2. User-defined Packages -> 
+    Ye packages developer khud bana sakte hain apne code ko organize karne ke liye. Jab aap apna custom code likhte hain, toh aap apne package bana kar usme classes, interfaces, aur sub-packages ko group kar sakte hain.
+
+
+________________________________________________________
+1. Creating a Package -> 
+
+new folder/
+│
+├── app/
+│   └── App.java
+│
+└── temp/
+    └── Index.java
+
+
+
+
+
+example -> 
+new folder/
+│
+├── app/
+│   └── App.java
+
+code -> 
+
+package app;
+
+public class App {
+    public void show() {
+        System.out.println("Show method from App class");
+    }
+}
+
+
+
+________________________________________________________
+└── temp/
+    └── Index.java
+
+code -> 
+
+package temp;
+
+import app.App; 
+
+public class Index {
+    public static void main(String[] args) {
+        App appInstance = new App(); // App class ka instance banate hain
+        appInstance.show(); // show method ko call karte hain
+    }
+}
+
+
+
+
+
+
+
+code compiletion -> 
+
+important -> code ko compie parent directory me rah ke karana hoga nahi to error ayegi normaly jab main file co compile karoge tab error ayegi 
+
+________________________________________________________
+1. new folder se ye command chalaye -> javac app/App.java temp/Index.java
+
+run -> java temp.Index
+________________________________________________________
+
+
+2. Agar Folder Ke Andar Compile/Run Kar Rahe Hain Toh Kya Hoga?
+Agar aap pehle app/ folder me jaake App.java ko compile karte hain aur fir temp/ folder me jaake Index.java ko compile/run karte hain, toh error aa sakta hai.
+
+Yeh is wajah se hai kyunki Java packages parent directory se reference lete hain.
+
+________________________________________________________
+
+main function wali file se run karana -> javac -d . ../app/App.java Index.java
+run -> java temp.Index
+
+
+
+explain -> -d 
+
+
+problem 1 -> -d kahata hai ki jis file ko compile kiya ja raha use kaha store karana hai yani -d ke bad folder name pass kar sakate hai 
+
+example -> (.) dot ka matalab hai jis directory me rah ke compile kar rahe ho usi directory me . class file banengi ab file kahi bhi ho aur (amit) agar amit likha hai to amit name ka use jagah par folder banayega aur usme stor karega 
+
+example -> code -> 
+
+file1.java -> 
+
+class Temp{
+    public static void main(String[] args) {
+
+        MyApp obj = new MyApp();
+        obj.show();
+        System.out.println("hiii");
+
+    }
+}
+
+newfolder
+    |
+    > file1.java
+
+
+compile this file -> javac -d amit Temp.java
+
+compile ke bad ->
+
+    newfolder
+    |
+        >amit --> Temp.class
+    > file1.java
+
+
+explain -> is command ko chalate hi ek folder amit name ka banega aur usme . class file store ho jayegi
+
+
+
+
+problem 2 ->  agar jis file ko compile kar rahe ho usme koi package ka name likha hai yani define hai to agar package ka name aur jise compile kar rahe hai package ka name aur folder ka name same nahi hua to ek folder create karega jaha pahele karata tha usi ke andar
+
+jaise -> package rohan 
+
+
+package rohan;
+
+class Temp{
+    public static void main(String[] args) {
+
+        System.out.println("hiii");
+
+    }
+}
+
+
+newfolder
+    |
+    > file1.java
+
+
+compile this file -> javac -d amit Temp.java
+
+compile ke bad ->
+
+    newfolder
+    |
+    |   >amit 
+    |      |
+    |      --> rohan -> Temp.class
+    > file1.java
+
+
+
+
+problem 3 -> ek hi bar me package ke andar sub package ke rup me . class file ko rakh sakate hai 
+
+create package -> 
+
+newfolder
+    |
+    > app -> MyApp.java
+
+code ->
+
+package app.amit;
+ public class MyApp {
+    public void show() {
+        System.out.println("show class MyApp app package");
+    }
+}
+
+import -> 
+
+newfolder
+    |
+    > main -> Temp.java
+
+code ->
+
+import app.amit.MyApp;
+
+
+class Temp{
+    public static void main(String[] args) {
+
+        MyApp obj = new MyApp();
+        obj.show();
+    }
+}
+
+
+newfolder
+    |
+    > app -> MyApp.java
+    > main -> Temp.java
+
+
+
+compile -> javac -d clases ..\app\MyApp.java Temp.java
+
+
+newfolder
+    |
+    > app -> MyApp.java
+    > main -> Temp.java
+        |
+        > clases -> Temp.class
+            |
+            > amit -> MyApp.class 
+
+
+
+
+________________________________________________________
+________________________________________________________
+How to Import Packages -> 
+
+
+1. Single Class Import ->
+    Agar aapko kisi package ki ek specific class use karni ho, to aap us class ko import kar sakte hain.
+
+   example-> import java.util.Scanner;
+
+2. Whole Package Import ->
+    Agar aapko ek package ki saari classes import karni ho, to wildcard (*) ka use karke poora package import kar sakte hain
+
+    example -> import java.util.*;
+
+3. Static Import -> 
+    Static import ka use karke aap kisi class ke static methods aur fields ko directly access kar sakte hain bina class ka naam likhe.
+
+    example -> 
+            import static java.lang.Math.*;
+
+            public class Main {
+                public static void main(String[] args) {
+                    System.out.println(sqrt(16));
+                    System.out.println(PI);
+                }
+            }
+
+
+4. No Import (Fully Qualified Name Use Karna)->
+    Agar aap import nahi karte aur directly class ka fully qualified name use karte hain, to bhi kaam chalega.
+
+public class Example {
+    public static void main(String[] args) {
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        System.out.println("Enter your name:");
+        String name = sc.nextLine();
+        System.out.println("Hello, " + name);
+    }
+}
+
+
+5. Custom Package Import -> 
+    Agar aap apna khud ka package banate hain, to usse import karne ke liye package ka naam specify karna hota hai.
+
+Package Create Karna:->
+
+    package mypackage;
+    public class MyClass {
+        public void display() {
+            System.out.println("Hello from MyClass in mypackage!");
+        }
+    }
+
+Import and Use:->
+
+    import mypackage.MyClass;
+
+    public class Main {
+        public static void main(String[] args) {
+            MyClass obj = new MyClass();
+            obj.display();
+        }
+    }
+
+
+6. On-Demand Class Loading (Reflection)->
+    Aap import ka directly use nahi karte, par classes ko runtime pe dynamically load karte hain using Reflection API. Yeh approach tab use hota hai jab aapko runtime pe pata ho ki kaunsi class chahiye.
+    -> Yaha ArrayList ko import karne ki zarurat nahi hai. Class.forName runtime pe class ko load karega.
+
+example->
+
+    public class Main {
+        public static void main(String[] args) throws ClassNotFoundException {
+            Class<?> clazz = Class.forName("java.util.ArrayList"); // Class runtime pe load hoti hai
+            System.out.println("Class loaded: " + clazz.getName());
+        }
+    }
+
+
+7. Partial Imports Using Classpath ->
+    Agar aap Java application ko build karte waqt javac ya java ke saath classpath define karte hain, to specific directories ya JAR files ke packages ko import kar sakte hain.
+
+    -> Is tarike se aap third-party libraries aur unke packages ko import karte hain
+
+    example ->  javac -cp /path/to/custom/library.jar Main.java
+                java -cp /path/to/custom/library.jar:. Main
+
+
+
+
+
+
+
+note -> agar package ke andar sub package hai aur tum sirf parent packages ko import kiye ho to sub package nahi ayega 
+
+yani ek folder ke andar kuchh file aur folder hai to aur tum bahar wale folder ko import kiye ho to anar ki sari file hi milegi uske andar ka folder nahi agar o bhi chahiye to use bhi import karana hoga 
+
+
+
+
+
+
+________________________________________________________
+Sub-packages -> Packages ke andar aur bhi packages ho sakte hain, jo sub-packages kehlaate hain.
+            -> Sub-packages ko access karte waqt full path likhna hota hai.
+            -> sub package ka matalab ek folder ke andar ke folders ko sub package kahate hai
+
+    for example -> 
+        java.util (main package)
+        java.util.regex (sub-package of java.util)
+
+
+
+Import -> 
+    -> Ek project ke andar multiple packages ho sakte hain.
+    -> package ka naam unique hona chahiye.
+    -> Package ke naam ko folder structure ke according organize kiya jata hai.
+    -> Default package bhi hota hai jab aap package define nahi karte (not recommended for large projects).
+
+
+
+________________________________________________________
+    
+Advanced Concepts in Java Packages
+
+1. Default Package ->
+    Jab aap kisi class ko kisi package ke andar explicitly define nahi karte, tab wo default package ka hissa hoti hai
+
+
+class MyClass {
+    public void display() {
+        System.out.println("This is in the default package.");
+    }
+}
+
+Limitation -> Default package ki classes ko kisi aur package se import nahi kar sakte. Ye sirf chhoti applications ke liye useful hai.
+
+
+2. Importing Classes with Same Name -> 
+
+Agar do different packages me same naam ki classes ho, toh aapko fully qualified name use karna padta hai.
+
+import java.util.Date;
+import java.sql.Date;
+
+public class Example {
+    public static void main(String[] args) {
+        java.util.Date utilDate = new java.util.Date(); // Fully qualified name
+        java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
+    }
+}

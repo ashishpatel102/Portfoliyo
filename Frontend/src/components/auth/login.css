@@ -1,0 +1,147 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: 0.5s ease;
+    position: absolute;
+    top: 10%;
+    left: 35%;
+    z-index: 1000;
+}
+
+.login-container .btn-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #dc3545;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+    padding: 10px 16px;
+}
+
+
+
+.primary-btn.btn-close:hover {
+    background-color: #b02a37;
+}
+
+
+
+.login-card {
+    background: var(--bg-color);
+    color: var(--text-color);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+.login-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+.login-form .form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #0056b3;
+}
+
+.login-footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.login-footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+
+.dactive {
+    transform: perspective(800px) rotateY(90deg) translateY(-100%);
+}
+
+.active {
+    transform: perspective(800px) rotateY(0deg);
+}
+
+.container {
+    overflow: hidden;
+    max-width: 50%;
+    overflow-y: auto;
+    height: 600px;
+    background: darkblue;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#main {
+
+    position: absolute;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media (max-width: 700px) {
+    .container {
+        max-width: 100%;
+    }
+
+    .login-container {
+        top: 10%;
+        left: 0;
+        width: 100%;
+    }
+
+    .login-card {
+        box-shadow: none;
+    }
+}

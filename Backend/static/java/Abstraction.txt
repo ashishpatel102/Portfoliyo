@@ -1,0 +1,484 @@
+Abstraction
+
+ek aisi programming concept hai jisme hum kisi object ya system ki complex details ko chhupa kar sirf un features ko dikhate hain jo user ke liye important hote hain. Iska goal hai ki user ko bas essential functionalities mile aur internal working ke baare me na sochna pade.
+
+Abstraction ka goal hai implementation details ko hide karna aur simple interface provide karna. Abstraction me hum implementation ko hide karte hain aur user ko sirf essential functionality dikhate hain.
+
+Key Points of Abstraction:
+1.Details Hidden:- Internal implementation details ko hide kiya jata hai.
+2.Essential Features Shown:- Sirf necessary functionalities ko expose kiya jata hai.
+3.Achieved Through:- Abstract classes aur interfaces ke use se achieve kiya jata hai.
+
+abstraction 2 tarike se achieve kar sakate hai 
+ 1 abstract class
+ 2 interface
+
+
+
+ 1 abstract class ->
+ 
+ Ek abstract class Java mein ek aisi class hoti hai jiska object directly create nahi kiya ja sakta. Iska main purpose hai ek blueprint provide karna, jisme aap kuch methods ko abstract (without implementation) bana sakte ho aur kuch methods ko none abstract (with implementation) rakh sakte ho.
+
+ -> abstract class me sare method public hote hai hai yani ise overriding karane ke liye public lagana hoga
+ -> is class ka direct koi bhi object nahi banaya ja sakata hai isko use karane ke liye inherit karana hoga 
+ -> is class me do tarike ke method rakh sakate hai jisme body ho jisme body na ho
+ -> bina abstract method ke bhi class ko abstract banaya ja sakata hai 
+ -> bina abstract class ke abstract method nahi bana sakate ho 
+ -> isme Constructor same jaise normal class me hoti thi waise hi hota hai
+ -> Abstract class ka use abstraction achieve karne ke liye kiya jata hai, jisme aap complex details ko hide karte hain aur subclasses ko sirf ek common structure provide karte hain.
+
+
+Example 
+
+
+```
+abstract class Animal {
+
+    abstract void sound();
+
+    void sleep() {
+        System.out.println("This animal is sleeping.");
+    }
+}
+
+class Dog extends Animal {
+
+    void sound() {
+        System.out.println("Woof!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Animal animal = new Animal(); // Error: Cannot instantiate the type Animal
+        Dog dog = new Dog();
+        dog.sound();
+        dog.sleep();
+    }
+}
+
+```
+
+
+Example
+abstract + incapsulation / data hiding
+
+```
+abstract class BankAccount {
+    private double balance;
+
+    public BankAccount(double initialBalance) {
+        if (initialBalance > 0) {
+            this.balance = initialBalance;
+        }
+    }
+
+    protected void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: " + amount);
+        } else {
+            System.out.println("Invalid deposit amount!");
+        }
+    }
+
+    protected void withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+            System.out.println("Withdrawn: " + amount);
+        } else {
+            System.out.println("Insufficient balance or invalid amount!");
+        }
+    }
+
+    public void checkBalance() {
+        System.out.println("Current Balance: " + balance);
+    }
+
+    abstract void accountType();
+}
+
+class SavingsAccount extends BankAccount {
+    public SavingsAccount(double initialBalance) {
+        super(initialBalance);
+    }
+
+    void accountType() {
+        System.out.println("This is a Savings Account.");
+    }
+}
+
+
+class CurrentAccount extends BankAccount {
+    public CurrentAccount(double initialBalance) {
+        super(initialBalance);
+    }
+
+    void accountType() {
+        System.out.println("This is a Current Account.");
+    }
+}
+
+public class BankAbstractionExample {
+    public static void main(String[] args) {
+       
+        BankAccount savings = new SavingsAccount(10000);
+        savings.accountType();
+        savings.checkBalance();
+        savings.deposit(5000);
+        savings.withdraw(2000);
+        savings.checkBalance();
+
+        System.out.println(); 
+
+        
+        BankAccount current = new CurrentAccount(20000);
+        current.accountType();
+        current.checkBalance();
+        current.deposit(10000);
+        current.withdraw(5000);
+        current.checkBalance();
+    }
+}
+```
+
+
+Abstract class ki jarurat
+
+-> important functionalities ko hide karane ke liye 
+-> parrent ke pass ek aisa method ho jise parent chahata ho ki uska jo bhi child bane us method ko overriding kare 
+-> parrent ke pass ek aisa method ho jiski definition na dena chahata ho 
+-> parrent nahi chahata ki direct koi bhi uska object banaye / matalab parent ke pass jane ke liye pahele child ka object banana padega ya khud child banana padega 
+
+
+
+Interface  =>interface class ka ek template hote hai jaise object ka template class hota hai waise class ka template interface hota hai yani object ke pass kon si functionalities hogi uska structure class ke pass hoti hai aur class me kon si functionalities hogi uska structure interface ke pass hoti hai 
+
+interface ek aisa template hota hai jo methods ke signatures ko define karta hai, lekin un methods ki implementation nahi deta. Interface ka main purpose hai ki different classes ko ek common behavior define karna aur un classes ko method implementation ka ek template dena, jo wo apne hisaab se implement kar sakti hain.
+
+
+Interface ek contract ki tarah kaam karta hai jo classes ko define karne ke liye ek template provide karta hai. Isme sirf method declarations hote hain, unki implementation classes karte hain. Yeh Java mein abstraction aur multiple inheritance achieve karne ka ek important tool hai.
+
+interface ko implements kiya jata hai hai aur abstract class ko extends kiya jata hai 
+
+interface to interface -> extends
+interface to class -> implements
+interface and class -> extends than implements
+class to interface -> not support
+
+usecas -> multiple inheritance , abstraction achieve karane ke liye
+
+java 8 ke bad 
+
+-> java 8 ke bad kuchh chije same ho gai jaise method ki body bana pana yaha bhi sambhav ho gaya
+-> default  ka use kar ke method ki body de sakate hai 
+
+
+
+
+interface ki jarurat 
+
+-> interface 100% abstraction achieve karata hai  
+-> Interface ek contract ki tarah kaam karta hai 
+-> interface me Constructor nahi hote 
+-> interface ka direct ya indirect object nahi ban sakata yani object ban hi nahi sakata 
+-> interface ke variable public, static, and final hote hai aur method implicitly public and abstract hote hai
+
+Example
+```
+interface Animal {
+    int age = 10;
+
+    void sound();
+
+    default void eat() {
+        System.out.println("Animal is eating");
+    }
+
+    static void sleep() {
+        System.out.println("Animal is sleeping");
+    }
+}
+
+class Dog implements Animal {
+    
+    public void sound() {
+        System.out.println("Woof!");
+    }
+
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.sound();  
+        dog.eat();   
+        Animal.sleep();
+    }
+}
+
+```
+
+interface ke variable ki value change nahi ki ja sakati ku ki final hota hai aur iske final modifier ko bhi nahi change kiya ja sakata hai
+```
+interface Animal {
+    int age = 10;
+}
+
+class Dog implements Animal {
+    public static void main(String[] args) {
+        age = 20;
+    }
+}
+
+```
+
+
+multiple inherit in interface default method
+Problems -> jab do interface me same name  ka default method ho jaye to requer hai ki method ko overriding kiya jaye nahi to  ambiguity problem ayegi
+```
+interface A {
+    default void show() {
+        System.out.println("A's show");
+    }
+}
+
+interface B {
+    default void show() {
+        System.out.println("B's show");
+    }
+}
+
+class C implements A, B {
+   
+    public void show() {
+        System.out.println("C's implementation of show");
+    }
+
+    public static void main(String[] args) {
+        C obj = new C();
+        obj.show(); 
+    }
+}
+```
+
+
+
+
+------------------------------------------------------------------
+```
+interface A {
+
+    int a = 10;
+
+    default void getValue() {
+        System.out.println("hiii"+a);
+    }
+
+}
+
+interface B {
+    int a = 20;
+    default void display() {
+        System.out.println("Value of a is: "+a);
+    }
+
+    
+}
+
+public class Temp implements A,B {
+    public static void main(String[] args) {
+        Temp obj = new Temp();
+        obj.display();
+        obj.getValue();
+    }
+}
+
+
+```
+
+
+
+
+ek problem jo abstract class aur normal class nahi kar sakati 
+---------------------------------------------------------------------------
+```
+abstract class OnlinePayment {
+    abstract void makeOnlinePayment();
+}
+
+
+abstract class CardPayment {
+    abstract void makeCardPayment();
+}
+
+
+class PaymentProcessor extends OnlinePayment { 
+   
+    void makeOnlinePayment() {
+        System.out.println("Processing online payment...");
+    }
+    
+    // Problem: Can't inherit CardPayment directly
+}
+
+```
+
+->solve this problem using interface
+--------------------------------------------
+```
+interface OnlinePayment {
+    void makeOnlinePayment();
+}
+
+interface CardPayment {
+    void makeCardPayment();
+}
+
+class PaymentProcessor implements OnlinePayment, CardPayment {
+    
+    public void makeOnlinePayment() {
+        System.out.println("Processing online payment...");
+    }
+
+    public void makeCardPayment() {
+        System.out.println("Processing card payment...");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        PaymentProcessor payment = new PaymentProcessor();
+        
+        payment.makeOnlinePayment();
+        payment.makeCardPayment();
+    }
+}
+```
+
+
+
+perfect code need interface 
+-------------------------------------
+
+
+```
+interface Notification {
+    void sendNotification(String message);
+}
+
+
+class EmailNotification implements Notification {
+    public void sendNotification(String message) {
+        System.out.println("Sending Email: " + message);
+    }
+}
+
+class SMSNotification implements Notification {
+    public void sendNotification(String message) {
+        System.out.println("Sending SMS: " + message);
+    }
+}
+
+
+class PushNotification implements Notification {
+    public void sendNotification(String message) {
+        System.out.println("Sending Push Notification: " + message);
+    }
+}
+
+public class Temp {
+    public void notifyUser(Notification notification, String message) {
+        notification.sendNotification(message);
+    }
+
+    public static void main(String[] args) {
+        Temp service = new Temp();
+
+        service.notifyUser(new EmailNotification(), "Your order is confirmed!");
+
+        service.notifyUser(new SMSNotification(), "Your OTP is 123456");
+
+        service.notifyUser(new PushNotification(), "You have a new message!");
+    }
+}
+
+```
+
+
+
+note -> jab do class  me shame ho ya alag alag ho tab bhi class ka name .super.mathod name() likh ke call kar sakate hai child class se 
+
+```
+
+interface A{
+    
+    default void show(){
+    System.out.println("A");
+};
+}
+
+interface B {
+    
+    default void show(){
+        System.out.println("amit");
+    };
+}
+
+class C implements A,B{
+    public void show(){
+        System.out.println("this is a");
+    }
+    void display(){
+        B.super.show();
+    }
+}
+
+public class Temp {
+    public static void main(String[] args) {
+        C obj = new C();
+        obj.display();
+    }
+}
+
+```
+
+
+---------------------------------------------------------
+interface inner class -> interface me bhi inner class bana sakate hai 
+-> iska default modifier public aur static hota hai 
+-> inner class ko public static abstract bana sakate ho 
+-> interface me inner class ko private protected modifier nahi laga sakate 
+
+
+interface ke inner class ko private ku nahi bana sakate -> interface ke inner class ko private is liye bana sakate ku ki private hone par outer class yani interface me hi object ban pata inner class ka aur agar aisa hota to interface ke functionality kharab hoti aur interface ka main purpose kharab hota is waja se nahi banaya jata aur static ki waja se ku ki interface kahata hai mere andar ke sare eliments globliy access hai aur ise sub class me use kiya ja sakata hai par private hone se aisa nahi hota 
+
+```
+interface A {
+
+    class inner {
+        void show(){
+            System.out.println("show");
+        }
+
+        void display(){
+            System.out.println("display");
+        }
+
+    }
+}
+
+
+class Temp {
+    
+    public static void main(String[] args) {
+        A.inner obj = new A.inner();
+        obj.display();
+        obj.show();
+    }
+}
+
+
+```
+
+
+
+
+

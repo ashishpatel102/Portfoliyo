@@ -1,0 +1,386 @@
+Inheritance
+
+inheritance oops ka ek concepts hai jo parent class ka variable aur methods child class me ate hai Isse code reusability badhti hai aur maintenance easy ho jaata hai 
+
+
+inheritance ki Need 
+
+-> Ek baar likhe hue code ko bar-bar na likhne ki zarurat nahi hoti. Parent class ke methods aur properties ko child class inherit karke directly use kar sakti hai.
+-> Changes sirf parent class me karne se saare derived classes automatic update ho jaate hain.
+-> Inheritance ki wajah se dynamic method dispatch possible hota hai jisse runtime polymorphism achieve hota hai.
+-> Inheritance ke through hum existing code ko enhance ya extend kar sakte hain bina usko modify kiye
+
+
+    Dynamic Method Dispatch (Runtime Polymorphism) in Java
+
+        Dynamic Method Dispatch ka matlab hai ki method call ko runtime ke dauran resolve kiya jata hai, compile time par nahi. Iska use overriding ke concept me hota hai jaha parent class ka reference child class ke overridden method ko call karta hai.
+
+        importaint keys ->
+            ->Parent class ka reference variable child class ka object hold karta hai
+            ->Jab method call kiya jata hai, to program runtime par decide karta hai ki kaunsa method execute hoga — parent class ka ya child class ka
+            ->Method overriding ki wajah se dynamic dispatch possible hota ha
+            ->Compile time par method binding nahi hoti, balki runtime par decide hota hai.
+            ->Sirf overridden methods ke liye yeh kaam karta hai, fields (variables) ke liye nahi.
+            ->Isse polymorphism achieve hota hai.
+            ->Real-world scenarios jaise graphical user interfaces (GUIs) me event handling.
+
+
+            note -> 
+                    dynamic Dispatch yani agar chahate hai run time par decide kiya jaye method calling to jaruri hai ki parent class ka hi reference variable ho object child ka ho 
+
+                    Jab aap child class ka reference aur child class ka object use karte hain, tab bhi runtime polymorphism (dynamic dispatch) ka concept kaam karta hai. Lekin, yeh case mein method call compile-time par hi decide hota hai ku ki compiler ko pata hota hai ki kon sa method call karana hai 
+
+                    -> run time polymorphism ke liye jaruri hai ki parent ka reference variable ho ha child ka reference bhi kam karata hai par yaha decide compile time par hi ho jata hai is waja se run time polymorphism nahi hota ye 
+
+
+                    -> ek bat ka dhyan rakhe run time decide liya jaye agar chahate hai to jaruri hai ki parent ka ref variable ho
+            disadvantages ->  isse program thoda shlow ho jata hai ku ki run time par kam hota hai 
+
+
+disadvantages->
+
+debuging problem -> yaha par debuging karana asan nahi hai kisi method me problem ai to ye pata karana asan nahi ki kis class ka method me error aya hai 
+reusability problem -> jis method ki jarurat na ho o bhi method by default aa jate hai inherit hoke ya jaruri nahi hai method ko private banaya jaye kuchh karan ho sakate hai ki method ko private na banaya ja sake 
+return type change problem -> agar kabhi parent class ki method ki return type ko change kiya gaya to child ko bhi apana return type change karan padega ye asan nahi hai 
+
+very most emportant ->  child parent class se inherit hui hoti hai nahi ki parent class ko inherit karati hai 
+ku ki child ke ke ref me parent ka obj nahi aa sakata parent ke ref me child aa sakata hai to yad rahe ki parent se inherit hui hoti hai child na ki parent ko inherit karati hai dono me bahut antar hai
+
+
+type of inheritance
+
+    1. Single Inheritance
+    2. Multilevel Inheritance
+    3. Hierarchical Inheritance
+    5. Hybrid Inheritance (using Interfaces)
+    4. Multiple Inheritance (using Interfaces)
+    6 Relationship -> Has-a Relationship (Composition) and Is-a Relationship (Inheritance)
+
+
+1. Single Inheritance
+
+Single Inheritance me ek child class ek parent class se inherit karti hai.isse code reusability badhati hai isme sirf ek hi child aur ek parent class hoti hai bas
+
+
+class Parent {
+    void show() {
+        System.out.println("Parent class method");
+    }
+}
+
+
+class Child extends Parent {
+    void display() {
+        System.out.println("Child class method");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Child childObj = new Child();
+        childObj.show();
+        childObj.display();
+    }
+}
+
+
+
+
+2. Multilevel Inheritance 
+
+Multilevel inheritance ek inheritance ka type hai jisme ek class, doosri class ko inherit karti hai, aur woh doosri class, kisi aur parent class ko inherit karti hai. Isme chain of inheritance banti hai, jisme ek class ek ya zyada classes ko inherit karti hai.
+
+
+note -> java me sirf single inheritance hota hai bas matalab jitane bhi inheritance hai sab single inheritance hi hote hai agar nahi man rahe to suno jab am kisi bhi class ko inherit nahi karate tab bhi ek object class hai jo khud inheri ho jati hai yani sab class ka ek parent object class hoti hai 
+
+-> agar tumhe lagata hai aisa nahi hai to aisa asal me hota hai jis class me kisi bhi class ko inherit nahi kiya jata us class me object class khud inherit ho jati hai 
+
+example 1 ->
+
+
+public class Test {
+    public static void main(String[] args) {
+        
+    }
+}
+
+-> test class ko inheri nahi kiya gaya hai par test class ko ek class inherit kar rahi hai jiska name hai object class 
+
+example 2 ->
+
+class A{
+    void disp(){
+        System.out.println("class A");
+    }
+}
+
+
+public class Test extends A {
+    public static void main(String[] args) {
+        
+    }
+}
+
+isme ek class A hai Aur Ek class B hai jo A se inheri hui hai par A class kisi se inheri nahi hui hai to A ka parent  object class ho jayega matalab jis class me inheritance na hua hoga o class object class se inherit hogi 
+
+-> yani ye dikh single raha hai par hai Multilevel ku ki A ka bhi parent hai jo object class hai chahe mano single hi hota hai chahe mano Multilevel hota hai single nahi hota par sach bat to ye hai ki sirf single inheritance hota hai baki sab single se hi nikal ke aye hai 
+
+
+->> java only suport single inheritance baki sab ko single se hi banaya gaya hai 
+
+
+
+class Grandparent {
+    void show() {
+        System.out.println("Grandparent class method");
+    }
+}
+
+
+class Parent extends Grandparent {
+    void display() {
+        System.out.println("Parent class method");
+    }
+}
+
+
+class Child extends Parent {
+    void message() {
+        System.out.println("Child class method");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Child obj = new Child();
+        obj.show(); 
+        obj.display();
+        obj.message();
+    }
+}
+
+
+
+
+
+3. Hierarchical Inheritance
+
+Hierarchical Inheritance ek aisa inheritance hai jisme ek parent class se multiple child classes inherit hui hoti hai yani ek parent ke multiple child hote hai 
+
+
+
+class Animal {
+    void eat() {
+        System.out.println("Animal is eating.");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog is barking.");
+    }
+}
+
+
+class Cat extends Animal {
+    void meow() {
+        System.out.println("Cat is meowing.");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Dog dog = new Dog(); 
+        dog.eat(); 
+        dog.bark();
+
+        Cat cat = new Cat();
+        cat.eat();
+        cat.meow();
+    }
+}
+
+4. Multiple Inheritance in Java(using Interfaces)
+
+multiple inheritance ek aisa concept hai jisme ek child ke do parent hote hai kahane ka matalab child class do parent se inherit hoti hai ya ek child ke do parent hote hai java me ye class ke through allow nahi karate is concept ko achieve karane ke liye interface ka use karate hai ku ki class me ambiguity ki problem aa sakati thi
+
+ambiguity problem -> ambiguity ek aisi problem jisme do parent class hoti hai dono parent class me same name ka method define hota hai to system ko ye decide karna mushkil ho sakta hai ki kaunsa method call ho.
+-> is problem ko solve kiya ja sakata tha class ke through bhi par isko khud haindal karana padata ku ki jab same name ka method ata to ambiguity problem hoti use hatane ke liye method ko overrid karna padata jiski waja se problem solve ho jati jo sahi nahi tha
+
+-> yahi problem Abstract class me bhi thi ku ki waha dono tari ke ke method banaye ja sakate the jisme body ho ya body na ho is liye is problem ko interface se solve kiya gaya 
+
+-> is problem ko interface se solve karate hai ku ki interface me method ki body nahi hoti
+
+interface A {
+    void show();
+}
+
+
+interface B {
+    void display();
+}
+
+
+class C implements A, B {
+    
+    public void show() {
+        System.out.println("show");
+    }
+
+
+    public void display() {
+        System.out.println("display");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        C obj = new C();
+        obj.show();
+        obj.display();
+    }
+}
+
+-> par java 8 ke bad interface me bhi ambiguity problem hoti hai ku ki yaha par default method aur static method ki body banai ja sakati hai aur ambiguity problem ko hatane ke liye wahi purana tarika bola gaya ki method ko Override karana padega aur ye chutiyafa hai java walo ka jo aise kiye jab yahi karana tha to Abstract class ka use kar sakte the normal class ka bhi use kar sakte the
+
+interface A {
+    default void show() {
+        System.out.println("show A");
+    }
+}
+
+interface B {
+    default void show() {
+        System.out.println("show B");
+    }
+}
+
+class C implements A, B {
+
+    // Explicitly resolving ambiguity by overriding show()
+   
+    public void show() {
+        System.out.println("show C");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        C obj = new C();
+        obj.show();
+    }
+}
+
+
+
+
+5. Hybrid Inheritance in Java (using Interfaces)
+
+Hybrid Inheritance ek aisa inheritance hai jisme multiple inheritance aur single inheritance ka combination hota hai. Java mein direct hybrid inheritance allowed nahi hai (kyunki Java mein multiple inheritance classes ke through directly support nahi kiya jata). Lekin, Hybrid Inheritance ko achieve karne ke liye hum interfaces ka use kar sakte hain.
+
+-> Multiple Inheritance ko hum interfaces ke through implement kar sakte hain.
+-> Java mein multiple inheritance class ke through directly allowed nahi hai (kyunki yeh ambiguity create kar sakta hai), lekin interfaces ka use karke hum multiple inheritance ka benefit le sakte hain.
+-> Ek class ek parent class se inherit ho sakti hai, aur ek ya zyada interfaces ko implement kar sakti hai
+
+
+
+class Animal {
+    void eat() {
+        System.out.println("Animal is eating.");
+    }
+}
+
+
+interface Playable {
+    void play();
+}
+
+
+interface Swimmable {
+    void swim(); 
+}
+
+
+class Dog extends Animal implements Playable, Swimmable {
+  
+    public void play() {
+        System.out.println("Dog is playing.");
+    }
+
+  
+    public void swim() {
+        System.out.println("Dog is swimming.");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.eat();
+        dog.play(); 
+        dog.swim();
+    }
+}
+
+
+
+
+Relationship in Java:
+
+Java me classes aur objects ke beech do tarah ke relationships common hote hain:
+
+1. IS-A Relationship (Inheritance)
+   -> Jab ek class doosri class ko inherit karti hai, to ye IS-A relationship hota hai.
+   -> Java me ye extends (class ke liye) aur implements (interface ke liye) keyword se achieve kiya jata hai.
+   
+   example ->
+        class Animal { 
+
+        }
+
+        class Dog extends Animal {
+
+         }  // Dog IS-A Animal
+
+2. HAS-A Relationship (Composition/Aggregation)
+    -> Jab ek class ke andar doosri class ka reference hota hai, to ye HAS-A relationship hota hai.
+    -> Iska matlab ek class ke object ke paas doosre class ke object ki property hoti hai.
+
+    example->
+        class Engine {
+
+        }
+
+        class Car {
+            Engine engine = new Engine();  // Car HAS-A Engine
+        }
+
+
+Combining Both Relationships:
+---------------------------------------------
+
+class Engine {
+    void start() {
+        System.out.println("Engine started");
+    }
+}
+
+class Car extends Vehicle {  // IS-A relationship (Car IS-A Vehicle)
+    Engine engine = new Engine();  // HAS-A relationship (Car HAS-A Engine)
+
+    void startCar() {
+        engine.start();
+        System.out.println("Car started");
+    }
+}
+
+class Vehicle { }
+
+public class Test {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.startCar();
+    }
+}
+
+

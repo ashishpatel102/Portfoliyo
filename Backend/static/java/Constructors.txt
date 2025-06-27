@@ -1,0 +1,133 @@
+2.Constructors  
+        Default Constructor  
+        Parameterized Constructor 
+
+
+Constructors in Java -> Constructor ek special method hota hai jo jab bhi class ka object banaya jata hai tab automatically call hota hai. Constructor ka kaam class ke objects ko initialize karna hota hai/ properties ko initialize karana default value ke sath ya di gai value ke sath
+
+note -> Constructor automatically call to hota hai but ek tarike se dekha jaye to kaisa Constructor call hoga ye decision ham khud lete hai yani ek tarike se kah sakate hai ke automatically call nahi hota ham khud batate hai ki kaisa Constructor call ho 
+example 
+
+new constructorName()// no Parameterized call
+new constructorName("welcome")// one Parameterized call
+new constructorName("welcome",10)// string or int type two Parameterized call
+
+
+important key
+
+No Return Type -> Constructors ka koi return type nahi hota, na hi void.
+Same Name as Class -> Constructor ka naam hamesha class ke naam ke same hota hai.
+Automatic Call -> Constructor ko manually call nahi karte, yeh object creation ke samay automatically execute hota hai.
+Overloading Allowed -> Ek class me multiple constructors ho sakte hain (Constructor Overloading)
+
+
+No Return Type -> constructors ke age kuchh bhi return type ku nahi lagata void to hona chiye ku ki void to kuchh nahi ke liye lagaya jata hai 
+
+why No void return type -> constructors object ka address return karata hai is liye void nahi lagata yani return type class hoti hai jis class ka constructors hota hai ham khud se koi return type nahi laga sakate yahi waja hai ki void bhi nahi laga sakate ku ki jvm khud ye Handling karata hai void laga to memory address nahi return ho payega aur error ayega 
+
+-> constructors return karata hai sirf ek bar uske bad ham kuchh return nahi kar sakate ku ki method ek bar hi return karata hai bar bar nahi 
+-> agar constructors private ho gaya ya class me constructor kisi bhi tarike se na ban paya to us class ka instance nahi ban payega yani object nahi banega 
+
+Types of Constructors in Java 
+
+1. Default Constructor
+2. Parameterized constructors
+3. Copy Constructor
+4. Private Constructor
+
+1. Default Constructor -> yah ek aisa constructor hai jise khud compiler banata hai agar ham us class me constructor nahi banaye hai to agar ek bhi constructor bana diye to default constructor ko compiler ya jvm nahi banayega khud hi banana padega 
+-> default constructor class ke variables ko default value se initialize karata hai 
+
+class A {
+    int num;
+
+    A() {
+        System.out.println("Default constructor called");
+        num = 0;
+    }
+
+    public static void main(String[] args) {
+        A obj = new A();
+        System.out.println("num: " + obj.num);
+    }
+}
+
+
+2. Parameterized constructor -> Jab constructor ko parameters pass karte hain object creation ke waqt, to usse parameterized constructor kehte hain.
+
+
+class  A{
+    int num;
+
+    // Parameterized constructor
+    A(int n) {
+        num = n;
+    }
+
+    public static void main(String[] args) {
+        A obj = new A(10);
+        System.out.println("num: " + obj.num);
+    }
+}
+
+
+3. Copy Constructor -> Ek object ke values ko dusre object me copy karne ke liye use kiya jata hai Java me yeh directly support nahi karta, lekin manually banaya ja sakta hai.
+
+class A {
+    int num;
+
+    A(int n) {
+        num = n;
+    }
+
+    // Copy Constructor
+    A(A obj) {
+        num = obj.num;
+    }
+
+    public static void main(String[] args) {
+        A obj1 = new A(10);
+        A obj2 = new A(A);
+
+        System.out.println("obj1 num: " + obj1.num);
+        System.out.println("obj2 num: " + obj2.num);
+    }
+}
+
+_________________________________
+
+4. Private Constructor ->
+    Purpose -> Jab hum chahte hain ki ek class ka object outside classes me create na ho.
+    Common Use Case -> Singleton Design Pattern implementation me hota hai.
+
+
+class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {
+        System.out.println("Private Constructor called");
+    }
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+
+---------------------------------------------------------
+
+A obj = new A();
+
+A -> reference type 
+obj -> reference variables
+= -> asiment operator 
+new -> Keyword Runtime constructor calling / run time memory allocated
+A() -> constructor calling decision / Constructor / spacial method
+(new a()) -> object
+
+
+
+
+

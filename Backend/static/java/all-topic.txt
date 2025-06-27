@@ -1,0 +1,67 @@
+Java OOPs Ke Saare Topics (Complete Copy-Ready Version)  
+
+1. OOPs Ke Core Concepts 
+    1. Class
+    2. Object  
+    3. Encapsulation  
+    4. Abstraction          
+        Abstract Class  
+        Interface  
+    5. Inheritance
+        Single Inheritance  
+        Multilevel Inheritance  
+        Hierarchical Inheritance  
+        Hybrid Inheritance (using interfaces)  
+        Java does not support multiple inheritance directly to avoid ambiguity.  
+    6. Polymorphism  
+        Compile-time Polymorphism (Method Overloading , method Overhiding)  
+        Runtime Polymorphism (Method Overriding)  
+
+2. Additional OOPs Features in Java  
+    1.Access Modifiers  
+        public, private, protected, default  
+    2.Constructors  
+        Default Constructor  
+        Parameterized Constructor  
+    3.Keywords  
+        `this`  
+        `super` 
+        `final`
+    4.Static Members  
+        static variables  
+        static methods  
+        static blocks  
+    5.Inner Classes  
+        Nested Classes (Static Inner Class, Non-static Inner Class)  
+        Anonymous Inner Class  
+    6.Packages  
+    7.Object Class 
+    8.Wrapper Classes  
+    9.Interfaces  
+        `default` and `static` methods (Java 8 onwards)  
+        Functional interfaces using `@FunctionalInterface`  
+        Lambda Expressions  
+    10.Annotations e.g., `@Override`, `@Deprecated`, `@FunctionalInterface`  
+    11.Enums  
+    12.Exception Handling  
+
+
+
+3. Deprecated or Removed Features  
+    1.Applet API: Deprecated and removed due to security concerns.  
+    2.Java EE Features:Moved to Jakarta EE.  
+    3.Legacy APIs:`java.util.Date` replaced by `java.time`.  
+    4.Finalization (`finalize()` Method):** Deprecated due to poor performance.  
+    5.Sun Packages:Replaced by standard Java APIs.  
+
+
+
+4. Advanced OOPs Concepts  
+    1.Design Patterns:Singleton, Factory, Observer, etc.  
+    2.Serialization:Converting an object to a byte stream.  
+    3.Immutable Classes:Classes where state cannot be changed after creation.  
+    4.Garbage Collection:Automatic memory management.  
+    5.Dynamic Method Dispatch:Runtime polymorphism through method overriding.  
+    6.Dependency Injection:Used in frameworks like Spring.  
+
+

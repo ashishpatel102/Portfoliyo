@@ -1,0 +1,63 @@
+Encapsulation in Java
+
+    ek OOP concept hai jisme data (variables) aur methods (functions) ko ek unit mein band kiya jata hai. Java mein, encapsulation ka matlab hai ki class ke variables ko private banaya jata hai, aur unhe getter aur setter methods ke through access kiya jata hai
+
+    Encapsulation ki wajah se data hiding achieve hoti hai, jisme important data ko directly access hone se roka jata hai Iske liye private access modifier ka use hota hai aur public methods ke through data ko access ya modify kiya jata hai.
+
+Syntax Example
+
+
+class Person {
+    
+    private String name;
+    private int age;
+    
+    
+    public String getName() {
+        return name;
+    }
+    
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    
+    public int getAge() {
+        return age;
+    }
+    
+    
+    public void setAge(int age) {
+        if(age > 0) {
+            this.age = age;
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Person person = new Person();
+        
+        
+        person.setName("John");
+        person.setAge(30);
+        
+        
+        System.out.println("Name: " + person.getName());
+        System.out.println("Age: " + person.getAge());
+    }
+}
+
+
+encapsulation = data hiding + access control
+
+note -> Encapsulation ka focus data ko hide karna aur us data tak access ko control karna hota hai
+
+
+-> ek technique hai jisme hum data ko private banate hain aur unko access karne ke liye public getter/setter methods provide karte hain.
+-> Yeh data hiding ko ensure karta hai aur program ki **security, flexibility, aur maintainability ko improve karta hai.
+->Disadvantages yeh hain ki encapsulation thoda complexity aur code length badha sakta hai.
+
+

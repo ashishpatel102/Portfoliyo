@@ -1,0 +1,26 @@
+[
+  {
+    "id": "card1",
+    "title": "C Language",
+    "description": "Discover innovative solutions crafted for your business growth and success. Try it out now!",
+    "image": "https://i.pinimg.com/736x/5d/b0/d9/5db0d93ad01ae3d51e4887bc365b6fa1.jpg",
+    "buttonText": "Learn More",
+    "buttonLink": "/c-language"
+},
+{
+  "id": "card3",
+  "title": "Java",
+  "description": "Access premium resources and tutorials to accelerate your learning journey.",
+  "image": "https://i.pinimg.com/736x/50/71/d6/5071d64bff652464fc148a7c886c7a21.jpg",
+  "buttonText": "Start Learning",
+  "buttonLink": "/java"
+},
+  {
+    "id": "card2",
+    "title": "C++ Programing Language",
+    "description": "Be part of a growing network of like-minded creators, learners, and builders.",
+    "image": "https://i.pinimg.com/736x/d5/0b/03/d50b039d337efb00c2fb4b80707e1c0d.jpg",
+    "buttonText": "Join Now",
+    "buttonLink": "/c++"
+  }
+]
