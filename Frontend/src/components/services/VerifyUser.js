@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import LoginContext from '../common/LoginProvider';
+import HostIP  from './HostIP ';
 
 function useVerifyUser() {
   const [, setLogin] = useContext(LoginContext);
@@ -10,7 +11,7 @@ function useVerifyUser() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/verify", {
+        const res = await fetch(HostIP+"/api/verify", {
           credentials: "include",
         });
 
