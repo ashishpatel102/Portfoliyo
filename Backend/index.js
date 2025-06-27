@@ -17,7 +17,7 @@ connectDB();
 //     origin:'http://localhost:3000' 
 // }));
 app.use(cors({
-  origin: 'https://portfolio-hnia.onrender.com',  // 👈 live frontend domain
+  origin: ['https://portfoliyo-hlll.onrender.com', 'https://portfolio-hnia.onrender.com'],
   credentials: true
 }));
 app.use(cookieParser());
