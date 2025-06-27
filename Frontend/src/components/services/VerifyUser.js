@@ -11,8 +11,12 @@ function useVerifyUser() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch(HostIP+"/api/verify", {
-          credentials: "include",
+       const res = await fetch(HostIP + "/api/verify", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          credentials: "include"
         });
 
         const data = await res.json();
