@@ -8,7 +8,7 @@ import Resume from '../common/Resume';
 import Video from '../common/Video';
 import CloseContext from '../common/CloseProvider';
 import LoginContext from '../common/LoginProvider';
-import verifyUser from "../services/VerifyUser";
+import useVerifyUser from "../services/VerifyUser";
 
 
 
